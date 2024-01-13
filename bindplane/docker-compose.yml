@@ -60,7 +60,7 @@ services:
     restart: always
     image: nginx:latest
     volumes:
-      - ./config/default.conf:/etc/nginx/conf.d/default.conf
+      - ./config/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 8080:8080
 
@@ -84,6 +84,11 @@ services:
   bindplane:
     restart: always
     deploy:
+      # The NGINX configuration expects five bindplane servers
+      # with the names: bindplane-bindplane-1, bindplane-bindplane-2, etc.
+      # Do not change the replica count without modifying the NGINX configuration.
+      # Simiarly, the hostname "bindplane-bindplane-1" is derived from the compose
+      # directory name and the bindplane service name.
       replicas: 5
     image: ghcr.io/observiq/bindplane-ee:1.39.0
     environment:
