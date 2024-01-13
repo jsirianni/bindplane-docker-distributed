@@ -1,20 +1,21 @@
 # bindplane-docker-distributed
 
-- [bindplane-docker-distributed](#bindplane-docker-distributed)
-  * [Architecture](#architecture)
-    + [Monolithic](#monolithic)
-    + [Distributed](#distributed)
+- [Architecture](#architecture)
+  * [Monolithic](#monolithic)
+  * [Distributed](#distributed)
     + [Kafka Event Bus](#kafka-event-bus)
     + [Postgres](#postgres)
     + [Prometheus](#prometheus)
     + [Transform Agent](#transform-agent)
     + [Loadbalancer](#loadbalancer)
-  * [Usage](#usage)
-    + [Start](#start)
-    + [Stop](#stop)
-    + [Delete Stack](#delete-stack)
+- [Usage](#usage)
+  * [Start](#start)
+  * [Stop](#stop)
+  * [Delete Stack](#delete-stack)
 
-A Docker reference implementation for BindPlane OP distributed architecture.
+A Docker example implementation for BindPlane OP distributed architecture.
+The deployment model shown in this guide is not intended for Production, rather,
+it is to showcase what BindPlane OP looks like using the distributed model.
 
 ## Architecture
 
@@ -57,7 +58,7 @@ When operating BindPlane OP using a distributed architecture, several components
 - Loadbalancer
 - Remote transform agent
 
-### Kafka Event Bus
+#### Kafka Event Bus
 
 Kafka is used as the event bus for BindPlane. The event bus allows
 BindPlane to scale horizontally and dispatch events to the appropriate
@@ -69,7 +70,7 @@ The event bus allows multiple instances of BindPlane to coordinate events
 without requiring them to know about each other. There is no concept of
 a cluster and quorum.
 
-### Postgres
+#### Postgres
 
 Postgres is used as the primary data store for BindPlane. Postgres
 stores all configuration, agent state, and account information.
@@ -85,7 +86,7 @@ Some users will opt to start with Postgres despite having a single instance
 of BindPlane. This will allow them to scale up in the future without
 migrating from Bolt Store to Postgres.
 
-### Prometheus
+#### Prometheus
 
 Prometheus is the time series database used by BindPlane to store
 agent throughput measurements. Throughput measurements are used to track agent telemetry volume and reduction.
@@ -98,7 +99,7 @@ When BindPlane is operating in distributed mode, a dedicated
 Prometheus instance is required to allow multiple instances of
 BindPlane to share a common time series database.
 
-### Transform Agent
+#### Transform Agent
 
 The Transform Agent is used by BindPlane's processor preview feature.
 It allows BindPlane to display the before and after effects of a processor.
@@ -110,7 +111,7 @@ to deploy their own Transform Agent.
 When BindPlane is operating in distributed mode, a dedicated transform
 agent (one or more) is required.
 
-### Loadbalancer
+#### Loadbalancer
 
 When operating multiple instances of BindPlane, a load balancer
 is required for distributing requests across the BindPlane
