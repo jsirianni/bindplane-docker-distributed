@@ -26,6 +26,7 @@ services:
       timeout: 10s
       retries: 5
 
+  postgresql:
     container_name: postgres
     restart: always
     image: postgres:14.0
@@ -81,7 +82,6 @@ services:
   #   NOTE: Agents outside of this docker context will not be able to
   #   connect because they cannot resolve the "bindplane" service.
   bindplane:
-    container_name: bindplane
     restart: always
     deploy:
       replicas: 5
