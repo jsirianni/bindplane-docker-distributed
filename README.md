@@ -1,5 +1,9 @@
 # bindplane-docker-distributed
 
+A Docker example implementation for BindPlane OP distributed architecture.
+The deployment model shown in this guide is not intended for Production, rather,
+it is to showcase what BindPlane OP looks like using the distributed model.
+
 - [Architecture](#architecture)
   * [Monolithic](#monolithic)
   * [Distributed](#distributed)
@@ -12,10 +16,6 @@
   * [Start](#start)
   * [Stop](#stop)
   * [Delete Stack](#delete-stack)
-
-A Docker example implementation for BindPlane OP distributed architecture.
-The deployment model shown in this guide is not intended for Production, rather,
-it is to showcase what BindPlane OP looks like using the distributed model.
 
 ## Architecture
 
