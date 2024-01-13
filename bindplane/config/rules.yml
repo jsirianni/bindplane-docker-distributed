@@ -1,0 +1,6 @@
+groups:
+- name: configuration-rollups
+  interval: 1m
+  rules:
+  - record: bindplane_agent_measurements:rollup:rate:1m
+    expr: sum without (agent) (rate(bindplane_agent_measurements{}[1m] offset 10s))
