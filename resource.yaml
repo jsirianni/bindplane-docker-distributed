@@ -1,0 +1,96 @@
+---
+apiVersion: bindplane.observiq.com/v1
+kind: Destination
+metadata:
+    id: prom
+    name: prom
+spec:
+    type: prometheus
+    parameters:
+        - name: listen_address
+          value: 127.0.0.1
+        - name: listen_port
+          value: 9000
+        - name: namespace
+          value: ""
+        - name: add_unit_and_type
+          value: false
+        - name: configure_tls
+          value: false
+        - name: cert_file
+          value: ""
+        - name: key_file
+          value: ""
+        - name: ca_file
+          value: ""
+        - name: mutual_tls
+          value: false
+        - name: client_ca_file
+          value: ""
+status:
+    latest: true
+---
+apiVersion: bindplane.observiq.com/v1
+kind: Configuration
+metadata:
+    id: test
+    name: test
+    labels:
+        platform: linux
+spec:
+    contentType: ""
+    measurementInterval: ""
+    sources:
+        - id: 01HM4FDHHPTT81NQXHFFZGV489
+          type: host
+          parameters:
+            - name: metric_filtering
+              value:
+                - system.disk.io
+                - system.disk.io_time
+                - system.disk.merged
+                - system.disk.operation_time
+                - system.disk.operations
+                - system.disk.pending_operations
+                - system.disk.weighted_io_time
+                - system.processes.count
+                - system.processes.created
+                - system.cpu.time
+                - system.cpu.utilization
+            - name: enable_process
+              value: true
+            - name: process_metrics_filtering
+              value:
+                - process.context_switches
+                - process.cpu.utilization
+                - process.disk.operations
+                - process.memory.utilization
+                - process.open_file_descriptors
+                - process.paging.faults
+                - process.signals_pending
+                - process.threads
+                - process.handles
+            - name: mute_process_name_error
+              value: true
+            - name: mute_process_exe_error
+              value: true
+            - name: mute_process_io_error
+              value: false
+            - name: mute_process_user_error
+              value: false
+            - name: enable_process_filter
+              value: false
+            - name: process_include
+              value: []
+            - name: process_exclude
+              value: []
+            - name: process_filter_match_strategy
+              value: regexp
+            - name: collection_interval
+              value: 60
+    destinations:
+        - id: 01HM4FDPSRXC5FKAZRMY3KKDG4
+          name: prom
+    selector:
+        matchLabels:
+            configuration: test
