@@ -4,6 +4,11 @@ set -e
 
 cd $(dirname $0)
 
+if [ -z "$BINDPLANE_LICENSE" ]; then
+  echo "BINDPLANE_LICENSE is required"
+  exit 1
+fi
+
 # Container user ids
 prometheus_uid=65534
 postgres_uid=999
